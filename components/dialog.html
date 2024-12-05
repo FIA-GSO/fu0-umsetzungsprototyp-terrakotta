@@ -1,0 +1,67 @@
+<div class="modal fade" id="createDialog" tabindex="-1" aria-labelledby="createDialogLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title mdi mdi-plus-box" id="createDialogLabel"> Neuen Ausbildungsnachweis erstellen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="createForm">
+          <div class="mb-3">
+            <label for="dateInput" class="form-label mdi mdi-calendar"> Datum</label>
+            <input type="date" class="form-control" id="dateInput" required>
+          </div>
+          <div class="mb-3">
+            <label for="departmentInput" class="form-label mdi mdi-office-building"> Abteilung</label>
+            <input type="text" class="form-control" id="departmentInput" required>
+          </div>
+          <div class="mb-3">
+            <label for="yearInput" class="form-label mdi mdi-numeric"> Ausbildungsjahr</label>
+            <input type="number" class="form-control" id="yearInput" required>
+          </div>
+          <div class="mb-3">
+            <label for="statusInput" class="form-label mdi mdi-checkbox-marked-circle-outline"> Status</label>
+            <select class="form-control" id="statusInput" required>
+              <option value="Offen">Offen</option>
+              <option value="Abgeschlossen">Abgeschlossen</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary mdi mdi-cancel" data-bs-dismiss="modal"> Abbrechen</button>
+        <button type="button" class="btn btn-primary mdi mdi-content-save" onclick="saveEntry()"> Speichern</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Save Entry Functionality
+  function saveEntry() {
+    const date = document.getElementById("dateInput").value;
+    const department = document.getElementById("departmentInput").value;
+    const year = document.getElementById("yearInput").value;
+    const status = document.getElementById("statusInput").value;
+
+    if (date && department && year && status) {
+      const table = document.getElementById("dataTable");
+      const newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td>${date}</td>
+        <td>${department}</td>
+        <td>${year}</td>
+        <td>${status}</td>
+        <td>
+          <button class="btn btn-sm btn-primary mdi mdi-eye" onclick="viewEntry()"></button>
+          <button class="btn btn-sm btn-secondary mdi mdi-pencil" onclick="editEntry()"></button>
+        </td>
+      `;
+      document.getElementById("createForm").reset();
+      const modal = bootstrap.Modal.getInstance(document.getElementById("createDialog"));
+      modal.hide();
+    } else {
+      alert("Bitte alle Felder ausfüllen!");
+    }
+  }
+</script>
