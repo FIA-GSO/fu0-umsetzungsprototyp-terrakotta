@@ -79,7 +79,7 @@
   const loggedInUser = sessionStorage.getItem('loggedInUser');
     if (!loggedInUser) {
     alert('Bitte loggen Sie sich zuerst ein!');
-    window.location.href = 'login.html'; // Zurück zur Login-Seite
+    window.location.href = 'components/login.html';
   } else {
     document.getElementById('user').innerText = loggedInUser; // Benutzername anzeigen
   }
