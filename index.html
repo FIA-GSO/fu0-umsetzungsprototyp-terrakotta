@@ -75,20 +75,26 @@
   <div id="dialogComponent"></div>
 
   <script>
-    // Functionality for Viewing
-    function viewEntry() {
-      alert("Detailansicht eines Eintrags öffnen.");
+
+  const loggedInUser = sessionStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+    alert('Bitte loggen Sie sich zuerst ein!');
+    window.location.href = 'login.html'; // Zurück zur Login-Seite
+  } else {
+    document.getElementById('user').innerText = loggedInUser; // Benutzername anzeigen
+  }
+
+  const viewEntry = () => {
+     alert("Detailansicht eines Eintrags öffnen.");
     }
 
-    // Functionality for Editing
-    function editEntry() {
+  const editEntry = () => {
       alert("Bearbeitungsdialog öffnen.");
     }
 
-    // Load Dialog Component
-    fetch("components/dialog.html")
-      .then(response => response.text())
-      .then(html => document.getElementById("dialogComponent").innerHTML = html);
+  fetch("components/dialog.html")
+    .then(response => response.text())
+    .then(html => document.getElementById("dialogComponent").innerHTML = html);
   </script>
 </body>
 </html>
