@@ -14,11 +14,11 @@
                 <form id="loginForm">
                     <div class="mb-3">
                         <label for="username" class="form-label">Benutzername</label>
-                        <input type="text" class="form-control" id="username" required>
+                        <input type="text" class="form-control" id="username" autocomplete required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Passwort</label>
-                        <input type="password" class="form-control" id="password" required>
+                        <input type="password" class="form-control" id="password" autocomplete required>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
@@ -27,6 +27,11 @@
     </div>
 
     <script>
+        const users = [
+            { username: 'Admin', password: 'password1234' },
+            { username: 'User', password: 'password1234' }
+        ];
+
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -34,9 +39,9 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Beispiel: Benutzername "user" und Passwort "1234"
-            if (username === 'Admin' && password === 'password1234') {
-                localStorage.setItem('loggedInUser', username);
+            if (username.includes(users[0].username) && password.includes(users[0].password)) {
+                sessionStorage.setItem('loggedInUser', username);
+                sessionStorage.setItem('loggedInPassword', password);
                 window.location.href = 'index.html';
             } else {
                 alert('Ungültige Anmeldedaten!');
