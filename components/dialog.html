@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="createDialog" tabindex="-1" aria-labelledby="createDialogLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -35,33 +36,3 @@
     </div>
   </div>
 </div>
-
-<script>
-
-  const saveEntry = () => {
-    const date = document.getElementById("dateInput").value;
-    const department = document.getElementById("departmentInput").value;
-    const year = document.getElementById("yearInput").value;
-    const status = document.getElementById("statusInput").value;
-
-    if (date && department && year && status) {
-      const table = document.getElementById("dataTable");
-      const newRow = table.insertRow();
-      newRow.innerHTML = `
-        <td>${date}</td>
-        <td>${department}</td>
-        <td>${year}</td>
-        <td>${status}</td>
-        <td>
-          <button class="btn btn-sm btn-primary mdi mdi-eye" onclick="viewEntry()"></button>
-          <button class="btn btn-sm btn-secondary mdi mdi-pencil" onclick="editEntry()"></button>
-        </td>
-      `;
-      document.getElementById("createForm").reset();
-      const modal = bootstrap.Modal.getInstance(document.getElementById("createDialog"));
-      modal.hide();
-    } else {
-      alert("Bitte alle Felder ausfüllen!");
-    }
-  }
-</script>
