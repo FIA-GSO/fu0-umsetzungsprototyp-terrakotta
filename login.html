@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <h2 class="text-center">Login</h2>
-                <form id="loginForm">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Benutzername</label>
-                        <input type="text" class="form-control" id="username" autocomplete required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Passwort</label>
-                        <input type="password" class="form-control" id="password" autocomplete required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                </form>
-            </div>
-        </div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <h2 class="text-center">Login</h2>
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Benutzername</label>
+            <input type="text" class="form-control" id="username" autocomplete required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Passwort</label>
+            <input type="password" class="form-control" id="password" autocomplete required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <script>
-        const users = [
-            { username: 'Admin', password: 'password1234' },
-            { username: 'User', password: 'password1234' }
-        ];
+  <script>
+  const users = [
+    { username: 'Admin', password: 'password1234' },
+    { username: 'User', password: 'password1234' }
+  ];
 
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            // Simulierte Login-Logik
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+      // Simulierte Login-Logik
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-            if (username.includes(users[0].username) && password.includes(users[0].password)) {
-                sessionStorage.setItem('loggedInUser', username);
-                sessionStorage.setItem('loggedInPassword', password);
-                window.location.href = 'index.html';
-            } else {
-                alert('Ungültige Anmeldedaten!');
-            }
-        });
-    </script>
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+      sessionStorage.setItem('loggedInUser', username);
+      sessionStorage.setItem('loggedInPassword', password);
+      window.location.href = 'index.html';
+    } else {
+      alert('Ungültige Anmeldedaten!');
+    }
+  });
+  </script>
 </body>
 </html>
